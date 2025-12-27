@@ -8,7 +8,7 @@ const CONFIG = {
   // Your Cloud Run API
   API_URL: 'https://fathom-ai-api-823333525467.europe-west1.run.app',
   MAX_FREE_USES: 3,
-  CHECKOUT_URL: 'https://fathom-ai.lemonsqueezy.com/checkout'
+  CHECKOUT_URL: 'https://visionscraft.lemonsqueezy.com/checkout/buy/31d3b051-ca44-470b-813e-cad5fe94149d'
 };
 
 // ===== State =====

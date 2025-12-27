@@ -4,7 +4,7 @@
  */
 
 const CONFIG = {
-  CHECKOUT_URL: 'https://fathom-ai.lemonsqueezy.com/checkout',
+  CHECKOUT_URL: 'https://visionscraft.lemonsqueezy.com/checkout/buy/31d3b051-ca44-470b-813e-cad5fe94149d',
   MAX_FREE_USES: 3
 };
 
