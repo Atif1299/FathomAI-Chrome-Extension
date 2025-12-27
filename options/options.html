@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FathomAI Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #ffffff;
+      --bg-secondary: #f7f7f8;
+      --bg-tertiary: #efefef;
+      --text-primary: #1a1a1a;
+      --text-secondary: #5c5c5c;
+      --text-muted: #9a9a9a;
+      --border-light: #e5e5e5;
+      --border-default: #d4d4d4;
+      --accent: #7c5cff;
+      --accent-hover: #6b4ee0;
+      --accent-light: #f0edff;
+      --success: #00a67d;
+      --warning: #f5a623;
+      --error: #e53935;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      min-height: 100vh;
+      padding: 48px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      border-radius: 10px;
+      color: white;
+    }
+    
+    .brand-icon svg { width: 22px; height: 22px; }
+    
+    .brand-name {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    
+    .card {
+      background: var(--bg-base);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card-title svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+    
+    .license-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+    
+    .license-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .license-badge.free {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+    }
+    
+    .license-badge.pro {
+      background: linear-gradient(135deg, var(--warning), #e8941a);
+      color: white;
+    }
+    
+    .license-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .form-group { margin-bottom: 16px; }
+    
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+    
+    input[type="text"]::placeholder {
+      color: var(--text-muted);
+    }
+    
+    .help-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    
+    .help-text a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .help-text a:hover {
+      text-decoration: underline;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    
+    .status-msg {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      margin-top: 16px;
+      display: none;
+    }
+    
+    .status-msg.success {
+      display: block;
+      background: rgba(0, 166, 125, 0.1);
+      border: 1px solid rgba(0, 166, 125, 0.2);
+      color: var(--success);
+    }
+    
+    .status-msg.error {
+      display: block;
+      background: rgba(229, 57, 53, 0.1);
+      border: 1px solid rgba(229, 57, 53, 0.2);
+      color: var(--error);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    
+    .stat-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-light);
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    
+    .footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="brand-name">FathomAI</span>
+      </div>
+      <p class="subtitle">Settings</p>
+    </header>
+    
+    <div class="card">
+      <h2 class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Subscription
+      </h2>
+      
+      <div class="license-status">
+        <span class="license-badge" id="licenseBadge">Free</span>
+        <span class="license-text" id="licenseText">3 free uses per day</span>
+      </div>
+      
+      <div class="form-group">
+        <label for="licenseKey">License Key</label>
+        <input type="text" id="licenseKey" placeholder="Enter your license key...">
+        <p class="help-text">
+          Don't have one? <a href="https://fathom-ai.lemonsqueezy.com/checkout" target="_blank">Upgrade to Pro</a>
+        </p>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-primary" id="activateBtn">Activate License</button>
+      </div>
+      
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+    
+    <div class="card">
+      <h2 class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 20V10M12 20V4M6 20v-6"/>
+        </svg>
+        Usage
+      </h2>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="statToday">0</div>
+          <div class="stat-label">Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">All Time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statRemaining">3</div>
+          <div class="stat-label">Remaining</div>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>FathomAI v2.0 · <a href="#">Privacy</a> · <a href="#">Support</a></p>
+    </footer>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
