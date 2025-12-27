@@ -89,10 +89,13 @@ function updateStats(today, total) {
 function setupEventListeners() {
   elements.activateBtn.addEventListener('click', activateLicense);
   
-  elements.upgradeLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    chrome.tabs.create({ url: CONFIG.CHECKOUT_URL });
-  });
+  // Only add if element exists
+  if (elements.upgradeLink) {
+    elements.upgradeLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      chrome.tabs.create({ url: CONFIG.CHECKOUT_URL });
+    });
+  }
 }
 
 async function activateLicense() {
