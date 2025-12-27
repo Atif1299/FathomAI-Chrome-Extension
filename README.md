@@ -12,12 +12,12 @@ Extension/
 ├── background/           # Service worker
 ├── options/              # Settings page
 ├── assets/icons/         # Extension icons
-└── backend/              # Vercel API (deploy separately)
+└── backend/              # GCP Cloud Run API
 ```
 
 ---
 
-## Quick Start (Local Development)
+## Quick Start
 
 ### 1. Load Extension in Chrome
 
@@ -26,39 +26,25 @@ Extension/
 3. Click "Load unpacked"
 4. Select the `Extension` folder
 
-### 2. Deploy Backend to Vercel
+### 2. Deploy Backend to GCP Cloud Run
 
 ```bash
 cd backend
 
-# Install Vercel CLI
-npm i -g vercel
-
-# Login to Vercel
-vercel login
+# Enable APIs
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com
 
 # Deploy
-vercel --prod
+gcloud run deploy fathom-ai-api \
+  --source . \
+  --region europe-west1 \
+  --allow-unauthenticated \
+  --set-env-vars OPENAI_API_KEY=sk-your-key
 ```
 
-### 3. Set Environment Variables in Vercel
+### 3. Update Extension API URL
 
-Go to Vercel Dashboard → Your Project → Settings → Environment Variables:
-
-```
-OPENAI_API_KEY=sk-your-openai-api-key
-```
-
-### 4. Update Extension API URL
-
-In `popup/popup.js`, update the API_URL:
-
-```javascript
-const CONFIG = {
-  API_URL: 'https://your-project.vercel.app/api',
-  // ...
-};
-```
+In `popup/popup.js`, update the API_URL with your Cloud Run URL.
 
 ---
 
@@ -75,27 +61,22 @@ const CONFIG = {
 
 1. Create account at [lemonsqueezy.com](https://lemonsqueezy.com)
 2. Create a product: "FathomAI Pro" - $7/month
-3. Set up webhook to validate licenses
-4. Update checkout URL in extension code
+3. Update checkout URL in extension code
 
 ---
 
 ## Chrome Web Store Publishing
 
-1. Create developer account: [Chrome Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
-2. Pay $5 one-time fee
-3. Prepare assets:
-   - 128x128 icon (PNG)
-   - At least one 1280x800 screenshot
-   - Description and privacy policy
-4. Upload and submit for review
+1. Create developer account ($5 one-time fee)
+2. Prepare: 128x128 PNG icon, 1280x800 screenshot
+3. Upload and submit for review
 
 ---
 
 ## Tech Stack
 
 - **Extension**: JavaScript, HTML, CSS (Manifest V3)
-- **Backend**: Vercel Functions (Node.js)
+- **Backend**: GCP Cloud Run (Node.js/Express)
 - **AI**: OpenAI GPT-4o-mini
 - **Payments**: LemonSqueezy
 
